@@ -81,8 +81,15 @@ function init() {
   });
 
   // При закрытии — останавливаем видео
-  $("player").addEventListener("close", () => $("p-video").pause());
-}
+  $("player").addEventListener("close", () => {
+
+    $("p-video").pause();
+    $("p-video").removeAttribute("src");
+    $("p-video").load();
+
+    $("p-frame").src = "";
+
+});
 
 
 /* ---------- 3. Категории ---------- */
@@ -169,24 +176,54 @@ function card(v) {
 
 
 /* ---------- 5. Плеер ---------- */
+
 function openPlayer(v) {
 
     $("p-title").textContent = v.title;
     $("p-meta").textContent = v.category;
     $("p-desc").textContent = v.description;
 
-    const frame = $("p-video");
+    const video = $("p-video");
+    const frame = $("p-frame");
 
     if (!v.file) {
-        console.error("Ссылка на видео отсутствует:", v.title);
+        console.error("Ссылка отсутствует:", v.title);
         return;
     }
 
-    frame.src = v.file;
+    // Останавливаем предыдущие видео
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+
+    frame.src = "";
+    frame.hidden = true;
+    video.hidden = false;
+
+    // Проверяем, является ли ссылка Bunny Stream
+    if (
+        v.file.includes("mediadelivery.net/embed/")
+    ) {
+
+        // Запускаем Bunny Stream
+        video.hidden = true;
+        frame.hidden = false;
+
+        frame.src = v.file;
+
+    } else {
+
+        // Запускаем обычный MP4
+        video.hidden = false;
+        frame.hidden = true;
+
+        video.src = v.file;
+
+        video.play().catch(() => {});
+    }
 
     $("player").showModal();
 }
-
        
 
 // Поехали
