@@ -196,4 +196,4 @@ function openPlayer(v) {
 }
 
 // Поехали
-init(); на нахуй весь джс
+init();
