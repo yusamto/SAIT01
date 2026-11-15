@@ -139,12 +139,32 @@
   </main>
 
 
-  <!-- Окно плеера -->
-  <dialog id="player">
+ <!-- Окно плеера -->
+<dialog id="player">
 
-    <div class="player-head">
-      <h2 id="p-title"></h2>
-      <button id="p-close" aria-label="Закрыть">✕</button>
-    </div>
+  <div class="player-head">
+    <h2 id="p-title"></h2>
+    <button id="p-close" aria-label="Закрыть">✕</button>
+  </div>
+
+  <p id="p-meta"></p>
+  <p id="p-desc"></p>
+
+  <div class="video-container">
+
+    <!-- Обычные видео MP4 -->
+    <video id="p-video" controls playsinline></video>
+
+    <!-- Видео Bunny Stream -->
+    <iframe
+      id="p-frame"
+      allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+      allowfullscreen
+      hidden>
+    </iframe>
+
+  </div>
+
+</dialog>
 
     <!-- Bunny
