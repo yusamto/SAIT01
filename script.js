@@ -196,4 +196,4 @@ function openPlayer(v) {
 }
 
 // Поехали
-init();
+document.addEventListener("DOMContentLoaded", init);
