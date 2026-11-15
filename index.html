@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -15,64 +16,80 @@
 
   <!-- Стили -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Размеры Bunny Stream -->
+  <style>
+    .video-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
 </head>
 
 <body>
 
-  <!--
-    ===== СПИСОК ВИДЕО: добавляй сюда ссылки <a href="путь"> =====
-    Одна ссылка = одна карточка. Путь пиши с обычными / :
-      <a href="С:\Видео\море.mp4">Поездка на море</a>
-    Необязательно: data-cover="путь к обложке"  data-category="категория"  data-description="описание"
-  -->
+  <!-- СПИСОК ВИДЕО -->
   <div id="library" hidden>
 
     <a
-      href="https://player.mediadelivery.net/embed/810216/f6c59c2b-5583-417d-947a-807f05b066e6?autoplay=true&loop=false&muted=true&preload=true&responsive=true" 
+      href="https://player.mediadelivery.net/embed/810216/f6c59c2b-5583-417d-947a-807f05b066e6?autoplay=true&loop=false&muted=true&preload=true&responsive=true"
       data-cover="images/video1.jpg"
       data-category="Горячий"
       data-description="Что то там(2018)"
     >Запись 1</a>
 
-   <a
+    <a
       href="videos/video2.mp4"
       data-cover="images/video2.jpg"
       data-category="Game"
       data-description="Gameplay God of War(2018)"
     >Запись 2</a>
 
-<a
+    <a
       href="videos/video3.mp4"
       data-cover="images/video3.jpg"
       data-category="Game"
       data-description="Gameplay God of War(2018)"
     >Запись 3</a>
 
-<a
+    <a
       href="videos/video4.mp4"
       data-cover="images/video4.jpg"
       data-category="Game"
       data-description="Gameplay God of War(2018)"
     >Запись 4</a>
 
-<a
+    <a
       href="videos/video5.mp4"
       data-cover="images/video5.jpg"
       data-category="Game"
       data-description="Gameplay God of War(2018)"
     >Запись 5</a>
 
-<a
+    <a
       href="videos/video6.mp4"
       data-cover="images/video6.jpg"
       data-category="Game"
       data-description="Gameplay God of War(2018)"
     >Запись 6</a>
 
-
   </div>
 
-  <!-- Шапка с приоткрытой дверью -->
+
+  <!-- Шапка -->
   <header class="hero">
     <div class="door" aria-hidden="true"></div>
 
@@ -81,6 +98,7 @@
       <p>Закрытый архив видео для своих. Выберите запись и нажмите на обложку.</p>
     </div>
   </header>
+
 
   <main>
 
@@ -109,7 +127,8 @@
 
     </section>
 
-    <!-- Счётчик, сетка карточек и сообщение «пусто» -->
+
+    <!-- Карточки -->
     <p id="count" class="count"></p>
 
     <section id="grid" class="grid" aria-live="polite"></section>
@@ -120,6 +139,7 @@
 
   </main>
 
+
   <!-- Окно плеера -->
   <dialog id="player">
 
@@ -128,18 +148,4 @@
       <button id="p-close" aria-label="Закрыть">✕</button>
     </div>
 
-    <video id="p-video" controls preload="metadata"></video>
-
-    <p id="p-meta" class="meta"></p>
-    <p id="p-desc"></p>
-
-  </dialog>
-
-  <footer>Тайная комната · только для приглашённых</footer>
-
-  <!-- Скрипт -->
-  <script src="script.js"></script>
-
-</body>
-
-</html>
+    <!-- Bunny
