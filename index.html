@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Тайная комната</title>
+
+  <!-- Шрифты -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Стили -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!--
+    ===== СПИСОК ВИДЕО: добавляй сюда ссылки <a href="путь"> =====
+    Одна ссылка = одна карточка. Путь пиши с обычными / :
+      <a href="С:\Видео\море.mp4">Поездка на море</a>
+    Необязательно: data-cover="путь к обложке"  data-category="категория"  data-description="описание"
+  -->
+  <div id="library" hidden>
+
+    <a
+      href="videos/video1.mp4"
+      data-cover="images/video1.jpg"
+      data-category="Game"
+      data-description="Gameplay God of War(2018)"
+    >Запись 1</a>
+
+   <a
+      href="videos/video2.mp4"
+      data-cover="images/video2.jpg"
+      data-category="Game"
+      data-description="Gameplay God of War(2018)"
+    >Запись 2</a>
+
+<a
+      href="videos/video3.mp4"
+      data-cover="images/video3.jpg"
+      data-category="Game"
+      data-description="Gameplay God of War(2018)"
+    >Запись 3</a>
+
+<a
+      href="videos/video4.mp4"
+      data-cover="images/video4.jpg"
+      data-category="Game"
+      data-description="Gameplay God of War(2018)"
+    >Запись 4</a>
+
+<a
+      href="videos/video5.mp4"
+      data-cover="images/video5.jpg"
+      data-category="Game"
+      data-description="Gameplay God of War(2018)"
+    >Запись 5</a>
+
+<a
+      href="videos/video6.mp4"
+      data-cover="images/video6.jpg"
+      data-category="Game"
+      data-description="Gameplay God of War(2018)"
+    >Запись 6</a>
+
+
+  </div>
+
+  <!-- Шапка с приоткрытой дверью -->
+  <header class="hero">
+    <div class="door" aria-hidden="true"></div>
+
+    <div class="hero-text">
+      <h1>Тайная комната</h1>
+      <p>Закрытый архив видео для своих. Выберите запись и нажмите на обложку.</p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Поиск, сортировка и категории -->
+    <section class="toolbar" aria-label="Поиск и фильтры">
+
+      <input
+        id="search"
+        type="search"
+        placeholder="Поиск по названию и описанию"
+        aria-label="Поиск"
+      >
+
+      <select id="sort" aria-label="Сортировка">
+        <option value="list">Как в списке</option>
+        <option value="rev">В обратном порядке</option>
+        <option value="az">По названию А–Я</option>
+      </select>
+
+      <div
+        id="categories"
+        class="chips"
+        role="group"
+        aria-label="Категории"
+      ></div>
+
+    </section>
+
+    <!-- Счётчик, сетка карточек и сообщение «пусто» -->
+    <p id="count" class="count"></p>
+
+    <section id="grid" class="grid" aria-live="polite"></section>
+
+    <p id="empty" class="empty" hidden>
+      Ничего не найдено. Измените запрос или выберите «Все».
+    </p>
+
+  </main>
+
+  <!-- Окно плеера -->
+  <dialog id="player">
+
+    <div class="player-head">
+      <h2 id="p-title"></h2>
+      <button id="p-close" aria-label="Закрыть">✕</button>
+    </div>
+
+    <video id="p-video" controls preload="metadata"></video>
+
+    <p id="p-meta" class="meta"></p>
+    <p id="p-desc"></p>
+
+  </dialog>
+
+  <footer>Тайная комната · только для приглашённых</footer>
+
+  <!-- Скрипт -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
