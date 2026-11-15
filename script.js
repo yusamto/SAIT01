@@ -169,28 +169,24 @@ function card(v) {
 
 
 /* ---------- 5. Плеер ---------- */
-
 function openPlayer(v) {
-    const video = $("p-video");
 
     $("p-title").textContent = v.title;
     $("p-meta").textContent = v.category;
     $("p-desc").textContent = v.description;
 
-    video.pause();
-    video.removeAttribute("src");
-    video.load();
+    const frame = $("p-video");
+
+    if (!v.file) {
+        console.error("Ссылка на видео отсутствует:", v.title);
+        return;
+    }
+
+    frame.src = v.file;
 
     $("player").showModal();
+}
 
-    video.src = v.file;
-    video.load();
-
-    video.addEventListener("loadedmetadata", function onReady() {
-        video.removeEventListener("loadedmetadata", onReady);
-
-        video.play().catch(error => {
-            console.error("Ошибка запуска видео:", error);
         });
     });
 }
