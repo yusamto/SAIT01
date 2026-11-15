@@ -1,0 +1,343 @@
+/* ==========================================================================
+   ТАЙНАЯ КОМНАТА — стили
+   Содержание:
+     1. Переменные (цвета)
+     2. Базовые стили
+     3. Шапка (приоткрытая дверь)
+     4. Панель поиска и фильтров
+     5. Сетка карточек
+     6. Окно плеера
+     7. Подвал
+     8. Адаптив и доступность
+   ========================================================================== */
+
+
+/* ---------- 1. Переменные (цвета) ---------- */
+
+:root {
+  --bg:     #0f0d0c;
+  --panel:  #1a1613;
+  --line:   #2e2620;
+
+  --text:   #f1e8df;
+  --muted:  #a8998b;
+
+  --orange: #ff7a1a;
+  --amber:  #ffb454;
+  --ember:  #c2410c;
+}
+
+
+/* ---------- 2. Базовые стили ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1rem/1.6 'Manrope', system-ui, sans-serif;
+}
+
+h1,
+h2 {
+  font-family: 'Unbounded', 'Manrope', sans-serif;
+  margin: 0;
+}
+
+main {
+  padding: 0 6vw 3rem;
+}
+
+
+/* ---------- 3. Шапка: приоткрытая дверь с тёплым светом ---------- */
+
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem 6vw 3rem;
+  overflow: hidden;
+  background: radial-gradient(
+    60% 120% at 12% 50%,
+    rgba(255, 122, 26, .22),
+    transparent 65%
+  );
+}
+
+.door {
+  flex: none;
+  width: clamp(90px, 14vw, 150px);
+  aspect-ratio: 3 / 5;
+  border: 2px solid var(--line);
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(
+    90deg,
+    #120f0d 0 62%,
+    var(--amber) 62% 66%,
+    var(--orange) 66% 100%
+  );
+  box-shadow: 0 0 60px rgba(255, 122, 26, .45);
+}
+
+.hero-text h1 {
+  font-size: clamp(1.8rem, 5vw, 3.4rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.hero-text p {
+  color: var(--muted);
+  max-width: 42ch;
+  margin: .8rem 0 0;
+}
+
+
+/* ---------- 4. Панель поиска и фильтров ---------- */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+input,
+select {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: .7rem 1rem;
+  font: inherit;
+}
+
+input {
+  flex: 1 1 260px;
+}
+
+/* Обводка при фокусе с клавиатуры */
+input:focus,
+select:focus,
+button:focus-visible,
+.card:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+}
+
+/* Кнопки-категории */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  width: 100%;
+}
+
+.chip {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .4rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+.chip:hover {
+  color: var(--text);
+  border-color: var(--ember);
+}
+
+.chip.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #1a0f05;
+  font-weight: 700;
+}
+
+.count {
+  color: var(--muted);
+  margin: 1rem 0 .5rem;
+}
+
+
+/* ---------- 5. Сетка карточек ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.4rem;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color .2s, transform .2s;
+}
+
+.card:hover {
+  border-color: var(--orange);
+  transform: translateY(-3px);
+}
+
+/* Обложка */
+.thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--ember), #2a1408 70%) center / cover;
+}
+
+/* Значок «play» при наведении */
+.thumb::after {
+  content: "▶";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  color: #fff;
+  background: rgba(0, 0, 0, .25);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.card:hover .thumb::after {
+  opacity: 1;
+}
+
+/* Длительность (плашка в углу обложки) */
+.dur {
+  position: absolute;
+  right: .5rem;
+  bottom: .5rem;
+  background: rgba(0, 0, 0, .75);
+  border-radius: 6px;
+  padding: 0 .5rem;
+  font-size: .8rem;
+}
+
+/* Текст под обложкой */
+.card-body {
+  padding: .9rem 1rem 1.1rem;
+}
+
+.card-body h3 {
+  margin: 0 0 .3rem;
+  font-size: 1.05rem;
+}
+
+.card-body p {
+  margin: .3rem 0 0;
+  color: var(--muted);
+  font-size: .9rem;
+
+  /* обрезка описания до двух строк */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.meta {
+  color: var(--amber);
+  font-size: .85rem;
+  margin: 0;
+}
+
+.empty {
+  text-align: center;
+  color: var(--muted);
+  padding: 3rem 0;
+}
+
+
+/* ---------- 6. Окно плеера ---------- */
+
+dialog {
+  width: min(960px, 94vw);
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--orange);
+  border-radius: 14px;
+  padding: 1.2rem;
+  box-shadow: 0 0 80px rgba(255, 122, 26, .25);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, .82);
+}
+
+.player-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: .8rem;
+}
+
+.player-head h2 {
+  font-size: 1.2rem;
+}
+
+#p-close {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--text);
+  border-radius: 8px;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+}
+
+#p-close:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+video {
+  width: 100%;
+  max-height: 70vh;
+  background: #000;
+  border-radius: 8px;
+}
+
+
+/* ---------- 7. Подвал ---------- */
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem;
+  border-top: 1px solid var(--line);
+  font-size: .85rem;
+}
+
+
+/* ---------- 8. Адаптив и доступность ---------- */
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: 2.5rem;
+  }
+
+  .door {
+    width: 70px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
