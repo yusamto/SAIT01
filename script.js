@@ -187,9 +187,7 @@ function openPlayer(v) {
     $("player").showModal();
 }
 
-        });
-    });
-}
+       
 
 // Поехали
 document.addEventListener("DOMContentLoaded", init);
