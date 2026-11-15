@@ -178,53 +178,33 @@ function card(v) {
 /* ---------- 5. Плеер ---------- */
 
 function openPlayer(v) {
+  $("p-title").textContent = v.title;
+  $("p-meta").textContent = v.category;
+  $("p-desc").textContent = v.description;
 
-    $("p-title").textContent = v.title;
-    $("p-meta").textContent = v.category;
-    $("p-desc").textContent = v.description;
+  const video = $("p-video");
+  const frame = $("p-frame");
 
-    const video = $("p-video");
-    const frame = $("p-frame");
+  video.pause();
+  video.removeAttribute("src");
+  video.load();
 
-    if (!v.file) {
-        console.error("Ссылка отсутствует:", v.title);
-        return;
-    }
+  frame.src = "";
+  frame.hidden = true;
+  video.hidden = false;
 
-    // Останавливаем предыдущие видео
-    video.pause();
-    video.removeAttribute("src");
-    video.load();
-
-    frame.src = "";
-    frame.hidden = true;
+  if (v.file.includes("mediadelivery.net/embed/")) {
+    video.hidden = true;
+    frame.hidden = false;
+    frame.src = v.file;
+  } else {
+    video.src = v.file;
     video.hidden = false;
+    video.play().catch(() => {});
+  }
 
-    // Проверяем, является ли ссылка Bunny Stream
-    if (
-        v.file.includes("mediadelivery.net/embed/")
-    ) {
-
-        // Запускаем Bunny Stream
-        video.hidden = true;
-        frame.hidden = false;
-
-        frame.src = v.file;
-
-    } else {
-
-        // Запускаем обычный MP4
-        video.hidden = false;
-        frame.hidden = true;
-
-        video.src = v.file;
-
-        video.play().catch(() => {});
-    }
-
-    $("player").showModal();
+  $("player").showModal();
 }
-       
 
 // Поехали
 document.addEventListener("DOMContentLoaded", init);
